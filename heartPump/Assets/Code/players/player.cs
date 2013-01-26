@@ -51,6 +51,7 @@ public class player : MonoBehaviour {
 	{
 		_health = 1000;
 		_control.myState = Controller.State.Alive;
+		_dead = false;
 	}
 	
 	//takes no more damage when dead, also can't be pushed
