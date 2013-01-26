@@ -9,14 +9,19 @@ public class Controller : MonoBehaviour {
         Alive
     };
 
-    //Calvin Harris 18 months
-
     public State myState;
+    public GameObject myHpBar;
+    public GameObject myMpBar;
 
-    private tk2dBaseSprite _theSprite;
     private GameObject _theCollided;
+    private Transform _myTransform;
     private string _myID;
     private float _speed = 3.0f;
+    private float _translateX;
+    private float _translateY;
+    private float _myPosX;
+    private float _myPosY;
+    private float _myPosZ;
     
     const float RIGHT_X_CONSTRAINT = 2.5f;
     const float LEFT_X_CONSTRAINT = -2.4f;
@@ -28,8 +33,8 @@ public class Controller : MonoBehaviour {
 	void Start () 
     {
         myState = State.Alive;
-        _theSprite = this.gameObject.GetComponent<tk2dSprite>();
         _myID = this.gameObject.name;
+        _myTransform = this.transform;
 	}
 	
 	// Update is called once per frame
@@ -52,36 +57,38 @@ public class Controller : MonoBehaviour {
             Debug.Log(_myID + " is Dead.");
         }
 
+        DoHUD();
+
         if (_myID == "Player 1")
         Debug.Log(_myID + " is colliding with " + _theCollided);
 	}
 
     private void DoMovement()
     {
-        float translateX = Input.GetAxis(_myID + ": Horizontal") * _speed * Time.deltaTime;
-        float translateY = Input.GetAxis(_myID + ": Vertical") * _speed * Time.deltaTime;
+        _translateX = Input.GetAxis(_myID + ": Horizontal") * _speed * Time.deltaTime;
+        _translateY = Input.GetAxis(_myID + ": Vertical") * _speed * Time.deltaTime;
 
-        transform.Translate(translateX, translateY, 0);
+        _myTransform.Translate(_translateX, _translateY, 0);
 
         #region Movement Constraints
-        if (transform.position.x >= RIGHT_X_CONSTRAINT)
+        if (_myTransform.position.x >= RIGHT_X_CONSTRAINT)
         {
-            transform.position = new Vector3(RIGHT_X_CONSTRAINT, transform.position.y, transform.position.z);
+            _myTransform.position = new Vector3(RIGHT_X_CONSTRAINT, _myTransform.position.y, _myTransform.position.z);
         }
 
-        if (transform.position.x <= LEFT_X_CONSTRAINT)
+        if (_myTransform.position.x <= LEFT_X_CONSTRAINT)
         {
-            transform.position = new Vector3(LEFT_X_CONSTRAINT, transform.position.y, transform.position.z);
+            _myTransform.position = new Vector3(LEFT_X_CONSTRAINT, _myTransform.position.y, _myTransform.position.z);
         }
 
-        if (transform.position.y >= UP_Y_CONSTRAINT)
+        if (_myTransform.position.y >= UP_Y_CONSTRAINT)
         {
-            transform.position = new Vector3(transform.position.x, UP_Y_CONSTRAINT, transform.position.z);
+            _myTransform.position = new Vector3(_myTransform.position.x, UP_Y_CONSTRAINT, _myTransform.position.z);
         }
 
-        if (transform.position.y <= DOWN_Y_CONSTRAINT)
+        if (_myTransform.position.y <= DOWN_Y_CONSTRAINT)
         {
-            transform.position = new Vector3(transform.position.x, DOWN_Y_CONSTRAINT, transform.position.z);
+            _myTransform.position = new Vector3(_myTransform.position.x, DOWN_Y_CONSTRAINT, _myTransform.position.z);
         }
         #endregion
     }
@@ -93,6 +100,13 @@ public class Controller : MonoBehaviour {
 
     private void DoPush()
     {
+
+    }
+
+    private void DoHUD()
+    {
+        myHpBar.transform.position = new Vector3(_myTransform.position.x - .27f, _myTransform.position.y - .35f, _myTransform.position.z);
+        myMpBar.transform.position = new Vector3(_myTransform.position.x - .14f, _myTransform.position.y - .46f, _myTransform.position.z);
     }
 
     private void OnCollisionEnter(Collision collision)
