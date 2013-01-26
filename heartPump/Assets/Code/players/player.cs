@@ -6,6 +6,7 @@ public class player : MonoBehaviour {
 	private int magic;
 	private int score;
 	private spawner spawn;
+	private Controller control;
 	//private Controller control;
 	
 	void Start ()
@@ -14,12 +15,15 @@ public class player : MonoBehaviour {
 		magic = 100;
 		score = 0;
 		spawn = GetComponent<spawner>();
+		spawn.SetUp();
+		control = GetComponent<Controller>();
 	}
 	
 	void Update ()
 	{
-		if(health < 0)
+		if(health < 0)//TODO && not dead
 		{
+			health = 0;
 			Death();
 		}
 	}
@@ -27,6 +31,7 @@ public class player : MonoBehaviour {
 	private void Death()
 	{
 		//TODO: figure out what happens when the player dies
-		spawn.lockUp();
 	}
+	
+	//takes no more damage when dead, also can't be pushed
 }

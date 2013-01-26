@@ -18,13 +18,18 @@ public class spawner : MonoBehaviour {
 		if(_locked)
 		{
 			//TODO: decide how this is going to work
+			Spawn();
 		}
+		if (Input.GetButtonDown("Player 1" + ": A Button"))
+        {
+           StartCoroutine(Do());
+        }
 	}
 	
-	public void SetUp(Vector3 start)
+	public void SetUp()
 	{
-		_spawnLocation = start;
 		_transform = transform;
+		_spawnLocation = _transform.position;
 	}
 	
 	private void Spawn()
@@ -35,5 +40,13 @@ public class spawner : MonoBehaviour {
 	public void lockUp()
 	{
 		_locked = true;
+		
 	}
+	
+	IEnumerator Do()
+	{
+		yield return new WaitForSeconds(2);
+		_transform.position = _spawnLocation;
+	}
+	
 }
