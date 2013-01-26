@@ -6,6 +6,7 @@ public class spawner : MonoBehaviour {
 	private Vector3 _spawnLocation;
 	public bool isDead = false;
 	private Transform _transform;
+	private Vector3 _deathSpot = new Vector3(-2f,2f,0f);
 
 	void Start ()
 	{
@@ -39,6 +40,7 @@ public class spawner : MonoBehaviour {
 	{
 		isDead = true;
 		StartCoroutine(Do());
+		_transform.position = _deathSpot;
 	}
 	
 	IEnumerator Do()
