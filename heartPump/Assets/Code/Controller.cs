@@ -36,50 +36,57 @@ public class Controller : MonoBehaviour {
     {
         if (myState == State.Alive)
         {
-            float translateX = Input.GetAxis(myID + ": Horizontal") * speed * Time.deltaTime;
-            float translateY = Input.GetAxis(myID + ": Vertical") * speed * Time.deltaTime;
-
-            transform.Translate(translateX, translateY, 0);
-
-            if (transform.position.x >= RIGHT_X_CONSTRAINT)
-            {
-                transform.position = new Vector3(RIGHT_X_CONSTRAINT, transform.position.y, transform.position.z);
-            }
-
-            if (transform.position.x <= LEFT_X_CONSTRAINT)
-            {
-                transform.position = new Vector3(LEFT_X_CONSTRAINT, transform.position.y, transform.position.z);
-            }
-
-            if (transform.position.y >= UP_Y_CONSTRAINT)
-            {
-                transform.position = new Vector3(transform.position.x, UP_Y_CONSTRAINT, transform.position.z);
-            }
-
-            if (transform.position.y <= DOWN_Y_CONSTRAINT)
-            {
-                transform.position = new Vector3(transform.position.x, DOWN_Y_CONSTRAINT, transform.position.z);
-            }
-
+            doMovement();
             if (Input.GetButtonDown(myID + ": A Button"))
             {
-                theSprite.spriteId = 2;
+                doAttack();
             }
-
             else if (Input.GetButtonDown(myID + ": B Button"))
             {
-                theSprite.spriteId = 1;
-            }
-
-            else
-            {
-                theSprite.spriteId = 0;
+                doPush();
             }
         }
-
         else
         {
             Debug.Log(myID + " is Dead.");
         }
 	}
+
+    private void doMovement()
+    {
+        float translateX = Input.GetAxis(myID + ": Horizontal") * speed * Time.deltaTime;
+        float translateY = Input.GetAxis(myID + ": Vertical") * speed * Time.deltaTime;
+
+        transform.Translate(translateX, translateY, 0);
+
+        #region Movement Constraints
+        if (transform.position.x >= RIGHT_X_CONSTRAINT)
+        {
+            transform.position = new Vector3(RIGHT_X_CONSTRAINT, transform.position.y, transform.position.z);
+        }
+
+        if (transform.position.x <= LEFT_X_CONSTRAINT)
+        {
+            transform.position = new Vector3(LEFT_X_CONSTRAINT, transform.position.y, transform.position.z);
+        }
+
+        if (transform.position.y >= UP_Y_CONSTRAINT)
+        {
+            transform.position = new Vector3(transform.position.x, UP_Y_CONSTRAINT, transform.position.z);
+        }
+
+        if (transform.position.y <= DOWN_Y_CONSTRAINT)
+        {
+            transform.position = new Vector3(transform.position.x, DOWN_Y_CONSTRAINT, transform.position.z);
+        }
+        #endregion
+    }
+
+    private void doAttack()
+    {
+    }
+
+    private void doPush()
+    {
+    }
 }
