@@ -1,8 +1,9 @@
 ﻿<Properties>
   <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
-  <MonoDevelop.Ide.Workbench ActiveDocument="Assets\Plugins\tk2d\Code\Sprites\tk2dAnimatedSprite.cs">
+  <MonoDevelop.Ide.Workbench ActiveDocument="Assets\Code\players\player.cs">
     <Files>
-      <File FileName="Assets\Plugins\tk2d\Code\Sprites\tk2dAnimatedSprite.cs" Line="324" Column="1" />
+      <File FileName="Assets\Code\Spawners\spawner.cs" Line="32" Column="40" />
+      <File FileName="Assets\Code\players\player.cs" Line="25" Column="3" />
     </Files>
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.DebuggingService.Breakpoints>
