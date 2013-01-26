@@ -2,11 +2,10 @@ using UnityEngine;
 using System.Collections;
 
 public class spawner : MonoBehaviour {
-	private float _spawnTimer;
+	private float _spawnTimer = 2f;
 	private Vector3 _spawnLocation;
-	private bool _isDead = false;
+	public bool isDead = false;
 	private Transform _transform;
-	private bool _locked = false;
 
 	void Start ()
 	{
@@ -15,15 +14,14 @@ public class spawner : MonoBehaviour {
 	
 	void Update ()
 	{
-		if(_locked)
+		if(isDead)
 		{
-			//TODO: decide how this is going to work
-			Spawn();
+			
 		}
-		if (Input.GetButtonDown("Player 1" + ": A Button"))
-        {
-           StartCoroutine(Do());
-        }
+		else
+		{
+			
+		}
 	}
 	
 	public void SetUp()
@@ -37,16 +35,16 @@ public class spawner : MonoBehaviour {
 		_transform.position = _spawnLocation;
 	}
 	
-	public void lockUp()
+	public void Death()
 	{
-		_locked = true;
-		
+		isDead = true;
+		StartCoroutine(Do());
 	}
 	
 	IEnumerator Do()
 	{
-		yield return new WaitForSeconds(2);
-		_transform.position = _spawnLocation;
+		yield return new WaitForSeconds(_spawnTimer);
+		Spawn();
+		isDead = false;
 	}
-	
 }
