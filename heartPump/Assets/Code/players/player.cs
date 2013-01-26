@@ -1,10 +1,10 @@
 using UnityEngine;
 using System.Collections;
 
-public class player : MonoBehaviour {
-	private int _health;
-	private int _magic;
-	private int _score;
+public class Player : MonoBehaviour {
+	public int health;
+	public int magic;
+	public int score;
 	private spawner _spawn;
 	private Controller _control;
 	private bool _dead = false;
@@ -12,9 +12,9 @@ public class player : MonoBehaviour {
 	
 	void Start ()
 	{
-		_health = 1000;
-		_magic = 100;
-		_score = 0;
+		health = 1000;
+		magic = 100;
+		score = 0;
 		_spawn = GetComponent<spawner>();
 		_spawn.SetUp();
 		_control = GetComponent<Controller>();
@@ -24,12 +24,12 @@ public class player : MonoBehaviour {
 	{
 		if (Input.GetButtonDown("Player 1" + ": A Button"))
             {
-                _health  = 0;
+                health  = 0;
             }
 		
-		if(_health <= 0 && !_dead)//TODO && not dead
+		if(health <= 0 && !_dead)//TODO && not dead
 		{
-			_health = 0;
+			health = 0;
 			Death();
 		}
 		
@@ -49,7 +49,7 @@ public class player : MonoBehaviour {
 	
 	private void Live()
 	{
-		_health = 1000;
+		health = 1000;
 		_control.myState = Controller.State.Alive;
 		_dead = false;
 	}
