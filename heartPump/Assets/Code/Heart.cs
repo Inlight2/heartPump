@@ -54,7 +54,8 @@ public class Heart : MonoBehaviour {
 	
 	private void Death()
 	{
-		gameObject.SetActive (false);
+		//gameObject.SetActive (false);
+        Destroy(this.gameObject);
 	}
 	
 	private void OnCollisionEnter(Collision collisionInfo)

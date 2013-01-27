@@ -6,7 +6,7 @@ public class Spawner : MonoBehaviour {
 	private Vector3 _spawnLocation;
 	public bool isDead = false;
 	private Transform _transform;
-	private Vector3 _deathSpot = new Vector3(-2f,2f,0f);
+	private Vector3 _deathSpot = new Vector3(-2f,2f);
 
 	void Start ()
 	{
