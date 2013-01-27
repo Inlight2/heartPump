@@ -58,21 +58,21 @@ public class God : MonoBehaviour
 	
 	static public void giveScore(int playerNumber, int score)
 	{
-		switch(playerNumber)
-		{
-		case 1:
-			player1.score += score;
-			break;
-		case 2:
-			player2.score += score;
-			break;
-		case 3:
-			player3.score += score;
-			break;
-		case 4:
-			player4.score += score;
-			break;
-		}
+        switch (playerNumber)
+        {
+            case 1:
+                player1.score += score;
+                break;
+            case 2:
+                player2.score += score;
+                break;
+            case 3:
+                player3.score += score;
+                break;
+            case 4:
+                player4.score += score;
+                break;
+        }
 	}
 	
 	static public int getScore(int playerNumber)

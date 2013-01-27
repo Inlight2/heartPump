@@ -17,17 +17,24 @@ public class Controller : MonoBehaviour {
         Right
     };
 
+    public enum DirectionAttack
+    {
+        Left,
+        Right
+    };
+
     public float xOffset, yOffset;
 
     public State myState;
     public Direction myDirection;
+    public DirectionAttack myDirectAttack;
     public GameObject myHpBar;
     public GameObject myMpBar;
     public GameObject myPwrUp;
     public GameObject myPump;
-    public UILabel myScore;
-	public GameObject myWeapon;
+    public GameObject myWeapon;
     public GameObject pushPrefab;
+    public UILabel myScore;
 
     private GameObject _theCollided;
     private Player _myPlayer;
@@ -51,7 +58,7 @@ public class Controller : MonoBehaviour {
         myState = State.Alive;
         _myID = this.gameObject.name;
         _myTransform = this.transform;
-        _myPlayer = GetComponent<Player>();
+        _myPlayer = this.GetComponent<Player>();
         _myPumpSprite = myPump.GetComponent<tk2dSprite>();
 
         myHpBar.SetActive(true);
@@ -59,8 +66,11 @@ public class Controller : MonoBehaviour {
         myPwrUp.SetActive(true);
 	}
 	
-	void Update () 
+	void Update ()
     {
+        DoHUD();
+        DoScore();
+
         if (myState == State.Alive)
         {
             if (_isPumping == false)
@@ -106,9 +116,6 @@ public class Controller : MonoBehaviour {
         {
             Debug.Log(_myID + " is Dead.");
         }
-
-        DoHUD();
-        DoScore();
 	}
 
     private void DoMovement()
@@ -144,10 +151,12 @@ public class Controller : MonoBehaviour {
         if (Input.GetAxis(_myID + ": Horizontal") > 0f)
         {
             myDirection = Direction.Right;
+            myDirectAttack = DirectionAttack.Right;
         }
         else if (Input.GetAxis(_myID + ": Horizontal") < 0f)
         {
             myDirection = Direction.Left;
+            myDirectAttack = DirectionAttack.Left;
         }
         else if (Input.GetAxis(_myID + ": Vertical") > 0f)
         {
@@ -184,7 +193,7 @@ public class Controller : MonoBehaviour {
 		GameObject clone;
 		clone = (GameObject)Instantiate(myWeapon, _myTransform.position, Quaternion.identity);
 		clone.GetComponent<Weapon>().setTransform(_myPlayer.transform);
-		if(Input.GetAxis(_myID + ": Horizontal") < 0)
+		if(myDirectAttack == DirectionAttack.Left)
 		{
 			clone.GetComponent<Weapon>().SetLeft();
 		}
@@ -215,10 +224,28 @@ public class Controller : MonoBehaviour {
 
     private void DoHUD()
     {
+        TriggerHUD();
         myHpBar.transform.position = new Vector3(_myTransform.position.x - .27f, _myTransform.position.y - .35f, _myTransform.position.z);
         myMpBar.transform.position = new Vector3(_myTransform.position.x - .14f, _myTransform.position.y - .46f, _myTransform.position.z);
         myPwrUp.transform.position = new Vector3(_myTransform.position.x - .15f, _myTransform.position.y + .29f, _myTransform.position.z);
         myPump.transform.position = new Vector3(_myTransform.position.x - .07f, _myTransform.position.y - .11f, _myTransform.position.z);
+        myHpBar.GetComponent<UISlider>().sliderValue = (float)(_myPlayer.health / 3f);
+    }
+
+    private void TriggerHUD()
+    {
+        if (myState == State.Alive)
+        {
+            myHpBar.SetActive(true);
+            myMpBar.SetActive(true);
+            myPwrUp.SetActive(true);
+        }
+        if (myState == State.Dead)
+        {
+            myHpBar.SetActive(false);
+            myMpBar.SetActive(false);
+            myPwrUp.SetActive(false);
+        }
     }
 
     private void DoScore()

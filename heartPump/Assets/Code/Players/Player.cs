@@ -22,9 +22,9 @@ public class Player : MonoBehaviour {
 		health = _maxHealth;
 		magic = _maxMagic;
 		score = 0;
-		_spawn = GetComponent<Spawner>();
+		_spawn = this.GetComponent<Spawner>();
 		_spawn.SetUp();
-		_control = GetComponent<Controller>();
+		_control = this.GetComponent<Controller>();
 	}
 	
 	void Update ()
