@@ -9,13 +9,15 @@ public class Player : MonoBehaviour {
 	private Spawner _spawn;
 	private Controller _control;
 	private bool _dead = false;
+	private int _maxHealth = 3;
+	private int _maxMagic = 3;
 	
 	//private Controller control;
 	
 	void Start ()
 	{
-		health = 1000;
-		magic = 100;
+		health = _maxHealth;
+		magic = _maxMagic;
 		score = 0;
 		_spawn = GetComponent<Spawner>();
 		_spawn.SetUp();
@@ -46,7 +48,8 @@ public class Player : MonoBehaviour {
 	
 	private void Live()
 	{
-		health = 1000;
+		health = _maxHealth;
+		magic = _maxMagic;
 		_control.myState = Controller.State.Alive;
 		_dead = false;
 	}
@@ -59,6 +62,11 @@ public class Player : MonoBehaviour {
 	public void Pump()
 	{
 		score += God.Pump();
+	}
+	
+	public void Damage(int dmg)
+	{
+		health -= dmg;
 	}
 	
 	//takes no more damage when dead, also can't be pushed

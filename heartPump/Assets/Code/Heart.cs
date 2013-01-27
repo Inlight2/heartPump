@@ -23,7 +23,6 @@ public class Heart : MonoBehaviour {
 	{
 		if(_transform.localScale.magnitude > _startScale)
 			_transform.localScale *= _scaleDown;
-		Pump();
 	}
 	
 	public int Pump()

@@ -102,4 +102,46 @@ public class God : MonoBehaviour
 				return 0;
 		}
 	}
+	
+	static public void DamagePlayer(int playerNumber, int dmg)
+	{
+		switch(playerNumber)
+		{
+		case 1:
+			player1.Damage(dmg);
+			break;
+		case 2:
+			player2.Damage(dmg);
+			break;
+		case 3:
+			player3.Damage(dmg);
+			break;
+		case 4:
+			player4.Damage(dmg);
+			break;
+		default:
+			break;
+		}
+	}
+	
+	static public void DamagePlayer(string playerNumber, int dmg)
+	{
+		switch(playerNumber)
+		{
+		case "1":
+			player1.Damage(dmg);
+			break;
+		case "2":
+			player2.Damage(dmg);
+			break;
+		case "3":
+			player3.Damage(dmg);
+			break;
+		case "4":
+			player4.Damage(dmg);
+			break;
+		default:
+			break;
+		}
+	}
 }
