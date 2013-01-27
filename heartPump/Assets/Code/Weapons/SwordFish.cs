@@ -6,21 +6,23 @@ public class SwordFish : Weapon {
 	void Update ()
 	{
 		Spin();
-		if(_angleTurned > 180)
+		if(_angleTurned > 180 || _angleTurned < -180)
 		{
 			Destroy(this.gameObject);
 		}
+		_transfrom.position = _playerTransform.position;
 	}
 	
-	new public void SetLeft()
+	public override void SetLeft()
 	{
-		_transfrom.position += new Vector3(0.15f,0f,0f);
+		//_transfrom.Translate(new Vector3(0.15f,0f,0f));
+		Debug.Log("left");
 	}
 	
-	new public void SetRight()
+	public override void SetRight()
 	{
 		_rotationSpeed *= -1;
-		_transfrom.position += new Vector3(-0.3f,0f,0f);
+		//_transfrom.Translate(new Vector3(-0.3f,0f,0f));
 	}
 	
 	void OnTriggerEnter(Collider other) {

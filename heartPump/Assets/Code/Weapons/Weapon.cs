@@ -1,15 +1,17 @@
 using UnityEngine;
 using System.Collections;
 
-public class Weapon : MonoBehaviour
+public abstract class Weapon : MonoBehaviour
 {
 	protected float _angleTurned;
-	protected float _rotationSpeed = 15f;
+	protected float _rotationSpeed = 5f;
 	protected Transform _transfrom;
+	protected Transform _playerTransform;
 	
 	void Start ()
 	{
 		_transfrom = transform;
+		_transfrom.Rotate(new Vector3(0f,0f,45f));
 	}
 	
 	public void Spin()
@@ -18,14 +20,13 @@ public class Weapon : MonoBehaviour
 		_angleTurned += _rotationSpeed;
 	}
 	
-	public void SetLeft()
+	public void setTransform(Transform tmpTransform)
 	{
-		_transfrom.Rotate(new Vector3(0f,0f,270f));
+		_playerTransform = tmpTransform;
 	}
 	
-	public void SetRight()
-	{
-		_transfrom.Rotate(new Vector3(0f,0f,90f));
-	}
+	public abstract void SetLeft();
+	
+	public abstract void SetRight();
 	
 }

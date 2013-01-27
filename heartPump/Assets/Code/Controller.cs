@@ -16,6 +16,7 @@ public class Controller : MonoBehaviour {
     public GameObject myMpBar;
     public GameObject myPwrUp;
     public UILabel myScore;
+	public GameObject myWeapon;
 
     private GameObject _theCollided;
     private Player _myPlayer;
@@ -62,6 +63,10 @@ public class Controller : MonoBehaviour {
                     {
                         DoAttack();
                     }
+                }
+				else
+                {
+                    DoAttack();
                 }
             }
             else if (Input.GetButtonDown(_myID + ": B Button"))
@@ -118,7 +123,14 @@ public class Controller : MonoBehaviour {
 
     private void DoAttack()
     {
-
+		GameObject clone;
+		clone = (GameObject)Instantiate(myWeapon, _myTransform.position, Quaternion.identity);
+		clone.GetComponent<Weapon>().setTransform(_myPlayer.transform);
+		if(Input.GetAxis(_myID + ": Horizontal") < 0)
+		{
+			clone.GetComponent<Weapon>().SetLeft();
+		}
+		else clone.GetComponent<Weapon>().SetRight();
     }
 
     private void DoPush()
