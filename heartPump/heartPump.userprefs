@@ -1,6 +1,16 @@
 ﻿<Properties>
   <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
-  <MonoDevelop.Ide.Workbench />
+  <MonoDevelop.Ide.Workbench ActiveDocument="Assets\Code\God.cs">
+    <Files>
+      <File FileName="Assets\Code\PowerUps\PowerUp.cs" Line="7" Column="42" />
+      <File FileName="Assets\Code\PowerUps\HealthUp.cs" Line="8" Column="42" />
+      <File FileName="Assets\Code\players\player.cs" Line="66" Column="23" />
+      <File FileName="Assets\Code\PowerUps\Manager.cs" Line="13" Column="3" />
+      <File FileName="Assets\Code\Heart.cs" Line="59" Column="22" />
+      <File FileName="Assets\Code\God.cs" Line="20" Column="58" />
+      <File FileName="Assets\Code\Controller.cs" Line="101" Column="11" />
+    </Files>
+  </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.DebuggingService.Breakpoints>
     <BreakpointStore />
   </MonoDevelop.Ide.DebuggingService.Breakpoints>

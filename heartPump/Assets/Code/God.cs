@@ -8,8 +8,6 @@ public class God : MonoBehaviour
 	static public Player player3;
 	static public Player player4;
 	static public Heart heart;
-	public Heart heartb;
-	public Player playerb;
 	
 	void Start()
 	{
@@ -18,8 +16,6 @@ public class God : MonoBehaviour
 		player3 = GameObject.Find("Player 3").GetComponent<Player>();
 		player4 = GameObject.Find("Player 4").GetComponent<Player>();
 		heart = GameObject.Find("Heart").GetComponent<Heart>();
-		heartb = heart;
-		playerb = player1;
 	}
 	
 	void Update ()
