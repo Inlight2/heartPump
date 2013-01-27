@@ -9,9 +9,12 @@ public class Controller : MonoBehaviour {
         Alive
     };
 
+    public float xOffset, yOffset;
+
     public State myState;
     public GameObject myHpBar;
     public GameObject myMpBar;
+    public GameObject myPwrUp;
 
     private GameObject _theCollided;
     private Transform _myTransform;
@@ -19,9 +22,6 @@ public class Controller : MonoBehaviour {
     private float _speed = 3.0f;
     private float _translateX;
     private float _translateY;
-    private float _myPosX;
-    private float _myPosY;
-    private float _myPosZ;
     
     const float RIGHT_X_CONSTRAINT = 2.5f;
     const float LEFT_X_CONSTRAINT = -2.4f;
@@ -35,6 +35,10 @@ public class Controller : MonoBehaviour {
         myState = State.Alive;
         _myID = this.gameObject.name;
         _myTransform = this.transform;
+
+        myHpBar.SetActive(true);
+        myMpBar.SetActive(true);
+        myPwrUp.SetActive(true);
 	}
 	
 	// Update is called once per frame
@@ -45,7 +49,14 @@ public class Controller : MonoBehaviour {
             DoMovement();
             if (Input.GetButtonDown(_myID + ": A Button"))
             {
-                DoAttack();
+                if (_theCollided.gameObject.name == "Heart")
+                {
+                    DoPump();
+                }
+                else
+                {
+                    DoAttack();
+                }
             }
             else if (Input.GetButtonDown(_myID + ": B Button"))
             {
@@ -93,6 +104,11 @@ public class Controller : MonoBehaviour {
         #endregion
     }
 
+    private void DoPump()
+    {
+
+    }
+
     private void DoAttack()
     {
 
@@ -107,6 +123,7 @@ public class Controller : MonoBehaviour {
     {
         myHpBar.transform.position = new Vector3(_myTransform.position.x - .27f, _myTransform.position.y - .35f, _myTransform.position.z);
         myMpBar.transform.position = new Vector3(_myTransform.position.x - .14f, _myTransform.position.y - .46f, _myTransform.position.z);
+        myPwrUp.transform.position = new Vector3(_myTransform.position.x - .15f, _myTransform.position.y + .29f, _myTransform.position.z);
     }
 
     private void OnCollisionEnter(Collision collision)
