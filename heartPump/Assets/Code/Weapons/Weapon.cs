@@ -8,12 +8,6 @@ public abstract class Weapon : MonoBehaviour
 	protected Transform _transfrom;
 	protected Transform _playerTransform;
 	
-	void Start ()
-	{
-		_transfrom = transform;
-		_transfrom.Rotate(new Vector3(0f,0f,45f));
-	}
-	
 	public void Spin()
 	{
 		_transfrom.Rotate(new Vector3(0f,0f,_rotationSpeed));

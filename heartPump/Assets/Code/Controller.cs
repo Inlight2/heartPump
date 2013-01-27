@@ -116,6 +116,17 @@ public class Controller : MonoBehaviour {
         {
             Debug.Log(_myID + " is Dead.");
         }
+		
+		if (Input.GetButtonDown(_myID + ": X Button"))
+            {
+                _myPlayer.useItem();
+            }
+		
+	}
+	
+	public void setId(string id)
+	{
+		_myID = id;
 	}
 
     private void DoMovement()

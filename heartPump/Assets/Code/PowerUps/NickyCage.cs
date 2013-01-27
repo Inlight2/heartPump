@@ -1,12 +1,14 @@
 using UnityEngine;
 using System.Collections;
 
-public class NickyCage : PowerUp {
+public class NickyCage : MonoBehaviour {
 	
-	private Vector3 _origin = new Vector3(0.05f,1.05f,-3.1f);
-	
-	public override void Use ()
+	void OnCollisionEnter(Collision collisionInfo)
 	{
-		Instantiate(God.manager.theCage, _origin, Quaternion.identity);
+		if(string.Equals(collisionInfo.gameObject.tag, "Player"))
+		{
+			God.giveItem(collisionInfo.gameObject.name.Substring(collisionInfo.gameObject.name.Length - 1));
+			Destroy(this.gameObject);
+		}
 	}
 }

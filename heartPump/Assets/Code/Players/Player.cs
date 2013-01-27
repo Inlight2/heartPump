@@ -8,6 +8,7 @@ public class Player : MonoBehaviour {
 	public bool item;
 	
 	public PowerUp nickyKage;
+	private Vector3 _origin = new Vector3(0.05f,1.05f,-5f);
 	
 	private Spawner _spawn;
 	private Controller _control;
@@ -61,7 +62,7 @@ public class Player : MonoBehaviour {
 	{
 		if(item)
 		{
-			nickyKage.Use();
+			Instantiate(God.manager.theCage, _origin, Quaternion.identity);
 			item = false;
 		}
 	}
