@@ -15,8 +15,10 @@ public class Controller : MonoBehaviour {
     public GameObject myHpBar;
     public GameObject myMpBar;
     public GameObject myPwrUp;
+    public UILabel myScore;
 
     private GameObject _theCollided;
+    private Player _myPlayer;
     private Transform _myTransform;
     private string _myID;
     private float _speed = 3.0f;
@@ -35,6 +37,7 @@ public class Controller : MonoBehaviour {
         myState = State.Alive;
         _myID = this.gameObject.name;
         _myTransform = this.transform;
+        _myPlayer = GetComponent<Player>();
 
         myHpBar.SetActive(true);
         myMpBar.SetActive(true);
@@ -49,13 +52,16 @@ public class Controller : MonoBehaviour {
             DoMovement();
             if (Input.GetButtonDown(_myID + ": A Button"))
             {
-                if (_theCollided.gameObject.name == "Heart")
+                if (_theCollided != null)
                 {
-                    DoPump();
-                }
-                else
-                {
-                    DoAttack();
+                    if (_theCollided.gameObject.name == "Heart")
+                    {
+                        DoPump();
+                    }
+                    else
+                    {
+                        DoAttack();
+                    }
                 }
             }
             else if (Input.GetButtonDown(_myID + ": B Button"))
@@ -69,6 +75,7 @@ public class Controller : MonoBehaviour {
         }
 
         DoHUD();
+        DoScore();
 
         if (_myID == "Player 1")
         Debug.Log(_myID + " is colliding with " + _theCollided);
@@ -106,7 +113,7 @@ public class Controller : MonoBehaviour {
 
     private void DoPump()
     {
-
+        _myPlayer.Pump();
     }
 
     private void DoAttack()
@@ -124,6 +131,28 @@ public class Controller : MonoBehaviour {
         myHpBar.transform.position = new Vector3(_myTransform.position.x - .27f, _myTransform.position.y - .35f, _myTransform.position.z);
         myMpBar.transform.position = new Vector3(_myTransform.position.x - .14f, _myTransform.position.y - .46f, _myTransform.position.z);
         myPwrUp.transform.position = new Vector3(_myTransform.position.x - .15f, _myTransform.position.y + .29f, _myTransform.position.z);
+    }
+
+    private void DoScore()
+    {
+        switch (_myID)
+        {
+            case "Player 1":
+                myScore.text = God.getScore(1).ToString();
+                break;
+            case "Player 2":
+                myScore.text = God.getScore(2).ToString();
+                break;
+            case "Player 3":
+                myScore.text = God.getScore(3).ToString();
+                break;
+            case "Player 4":
+                myScore.text = God.getScore(4).ToString();
+                break;
+            default:
+                Debug.Log("DoScore() on a DEFAULT!!!");
+                break;
+        }
     }
 
     private void OnCollisionEnter(Collision collision)
