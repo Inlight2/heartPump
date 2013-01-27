@@ -9,54 +9,82 @@ public class Controller : MonoBehaviour {
         Alive
     };
 
+    public enum Direction
+    {
+        Up,
+        Down,
+        Left,
+        Right
+    };
+
     public float xOffset, yOffset;
 
     public State myState;
+    public Direction myDirection;
     public GameObject myHpBar;
     public GameObject myMpBar;
     public GameObject myPwrUp;
+    public GameObject myPump;
     public UILabel myScore;
+    public GameObject pushPrefab;
 
     private GameObject _theCollided;
     private Player _myPlayer;
     private Transform _myTransform;
+    private tk2dSprite _myPumpSprite;
+
     private string _myID;
     private float _speed = 3.0f;
     private float _translateX;
     private float _translateY;
-    
+    private bool _isPumping = false;
+
     const float RIGHT_X_CONSTRAINT = 2.5f;
     const float LEFT_X_CONSTRAINT = -2.4f;
     const float UP_Y_CONSTRAINT = 2.7f;
     const float DOWN_Y_CONSTRAINT = -0.6f;
     
 
-	// Use this for initialization
 	void Start () 
     {
         myState = State.Alive;
         _myID = this.gameObject.name;
         _myTransform = this.transform;
         _myPlayer = GetComponent<Player>();
+        _myPumpSprite = myPump.GetComponent<tk2dSprite>();
 
         myHpBar.SetActive(true);
         myMpBar.SetActive(true);
         myPwrUp.SetActive(true);
 	}
 	
-	// Update is called once per frame
 	void Update () 
     {
         if (myState == State.Alive)
         {
-            DoMovement();
+            if (_isPumping == false)
+            {
+                DoMovement();
+            }
+
             if (Input.GetButtonDown(_myID + ": A Button"))
             {
                 if (_theCollided != null)
                 {
                     if (_theCollided.gameObject.name == "Heart")
                     {
-                        DoPump();
+                        if (_isPumping == false)
+                        {
+                            _isPumping = true;
+                            Invoke("CooldownPump", .5f);
+                            DoPump();
+                        }
+                        else
+                        {
+                            CancelInvoke("CooldownPump");
+                            Invoke("CooldownPump", .5f);
+                            DoPump();
+                        }
                     }
                     else
                     {
@@ -64,7 +92,7 @@ public class Controller : MonoBehaviour {
                     }
                 }
             }
-            else if (Input.GetButtonDown(_myID + ": B Button"))
+            else if (Input.GetButtonDown(_myID + ": B Button") && _isPumping == false)
             {
                 DoPush();
             }
@@ -76,9 +104,6 @@ public class Controller : MonoBehaviour {
 
         DoHUD();
         DoScore();
-
-        if (_myID == "Player 1")
-        Debug.Log(_myID + " is colliding with " + _theCollided);
 	}
 
     private void DoMovement()
@@ -109,11 +134,44 @@ public class Controller : MonoBehaviour {
             _myTransform.position = new Vector3(_myTransform.position.x, DOWN_Y_CONSTRAINT, _myTransform.position.z);
         }
         #endregion
+
+        #region Grab Direction
+        if (Input.GetAxis(_myID + ": Horizontal") > 0f)
+        {
+            myDirection = Direction.Right;
+        }
+        else if (Input.GetAxis(_myID + ": Horizontal") < 0f)
+        {
+            myDirection = Direction.Left;
+        }
+        else if (Input.GetAxis(_myID + ": Vertical") > 0f)
+        {
+            myDirection = Direction.Up;
+        }
+        else if (Input.GetAxis(_myID + ": Vertical") < 0f)
+        {
+            myDirection = Direction.Down;
+        }
+        #endregion
+
     }
 
     private void DoPump()
     {
         _myPlayer.Pump();
+        if (_myPumpSprite.spriteId == _myPumpSprite.GetSpriteIdByName("pumpUp"))
+        {
+            _myPumpSprite.spriteId = _myPumpSprite.GetSpriteIdByName("pumpDown");
+        }
+        else
+        {
+            _myPumpSprite.spriteId = _myPumpSprite.GetSpriteIdByName("pumpUp");
+        }
+    }
+
+    private void CooldownPump()
+    {
+        _isPumping = false;
     }
 
     private void DoAttack()
@@ -123,7 +181,24 @@ public class Controller : MonoBehaviour {
 
     private void DoPush()
     {
+        switch (myDirection)
+        {
+            case Direction.Up:
+                Instantiate(pushPrefab, new Vector3(_myTransform.position.x, _myTransform.position.y + .5f, _myTransform.position.z), Quaternion.Euler(0, 0, 0));
+                break;
+            case Direction.Down:
+                Instantiate(pushPrefab, new Vector3(_myTransform.position.x, _myTransform.position.y - .5f, _myTransform.position.z), Quaternion.Euler(0, 0, 180));
+                break;
+            case Direction.Left:
+                Instantiate(pushPrefab, new Vector3(_myTransform.position.x - .5f, _myTransform.position.y, _myTransform.position.z), Quaternion.Euler(0, 0, 90));
+                break;
+            case Direction.Right:
+                Instantiate(pushPrefab, new Vector3(_myTransform.position.x + .5f, _myTransform.position.y, _myTransform.position.z), Quaternion.Euler(0, 0, 270));
+                break;
+            default:
+                break;
 
+        }
     }
 
     private void DoHUD()
@@ -131,6 +206,7 @@ public class Controller : MonoBehaviour {
         myHpBar.transform.position = new Vector3(_myTransform.position.x - .27f, _myTransform.position.y - .35f, _myTransform.position.z);
         myMpBar.transform.position = new Vector3(_myTransform.position.x - .14f, _myTransform.position.y - .46f, _myTransform.position.z);
         myPwrUp.transform.position = new Vector3(_myTransform.position.x - .15f, _myTransform.position.y + .29f, _myTransform.position.z);
+        myPump.transform.position = new Vector3(_myTransform.position.x - .07f, _myTransform.position.y - .11f, _myTransform.position.z);
     }
 
     private void DoScore()
@@ -158,10 +234,19 @@ public class Controller : MonoBehaviour {
     private void OnCollisionEnter(Collision collision)
     {
         _theCollided = collision.gameObject;
+
+        if (collision.gameObject.name == "Heart")
+        {
+            myPump.SetActive(true);
+        }
     }
 
     private void OnCollisionExit(Collision collision)
     {
+        if (collision.gameObject.name == "Heart")
+        {
+            myPump.SetActive(false);
+        }
         _theCollided = null;
     }
 }
