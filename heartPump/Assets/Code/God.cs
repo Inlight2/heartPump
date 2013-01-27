@@ -7,18 +7,34 @@ public class God : MonoBehaviour
 	static public Player player2;
 	static public Player player3;
 	static public Player player4;
+	static public Heart heart;
+	public Heart heartb;
+	public Player playerb;
 	
 	void Start()
 	{
-		player1 = GameObject.FindWithTag("Player1").GetComponent<Player>();
-		player2 = GameObject.FindWithTag("Player2").GetComponent<Player>();
-		player3 = GameObject.FindWithTag("Player3").GetComponent<Player>();
-		player4 = GameObject.FindWithTag("Player4").GetComponent<Player>();
+		player1 = GameObject.Find("Player 1").GetComponent<Player>();
+		player2 = GameObject.Find("Player 2").GetComponent<Player>();
+		player3 = GameObject.Find("Player 3").GetComponent<Player>();
+		player4 = GameObject.Find("Player 4").GetComponent<Player>();
+		heart = GameObject.Find("Heart").GetComponent<Heart>();
+		heartb = heart;
+		playerb = player1;
 	}
 	
 	void Update ()
 	{
 		
+	}
+	
+	static public int Pump()
+	{
+		return heart.Pump();
+	}
+	
+	static public int Pump(int dmg)
+	{
+		return heart.Pump(dmg);
 	}
 	
 	static public void giveScore(int playerNumber, int score)

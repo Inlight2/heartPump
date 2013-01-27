@@ -1,15 +1,8 @@
 using UnityEngine;
 using System.Collections;
 
-public class PowerUp : MonoBehaviour {
-
-	// Use this for initialization
-	void Start () {
+public abstract class PowerUp : MonoBehaviour {
+	protected GameObject owner;
 	
-	}
-	
-	// Update is called once per frame
-	void Update () {
-	
-	}
+	public abstract void use(string player);
 }

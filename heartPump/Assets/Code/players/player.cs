@@ -5,9 +5,11 @@ public class Player : MonoBehaviour {
 	public int health;
 	public int magic;
 	public int score;
+	public PowerUp item;
 	private spawner _spawn;
 	private Controller _control;
 	private bool _dead = false;
+	
 	//private Controller control;
 	
 	void Start ()
@@ -52,6 +54,16 @@ public class Player : MonoBehaviour {
 		health = 1000;
 		_control.myState = Controller.State.Alive;
 		_dead = false;
+	}
+	
+	public void useItem()
+	{
+		item.use(tag);
+	}
+	
+	public void Pump()
+	{
+		score += God.Pump();
 	}
 	
 	//takes no more damage when dead, also can't be pushed

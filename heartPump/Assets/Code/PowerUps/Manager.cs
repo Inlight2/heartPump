@@ -2,15 +2,15 @@ using UnityEngine;
 using System.Collections;
 
 public class Manager : MonoBehaviour {
-	public PowerUp[] powersList;
+	public GameObject item;
 	private int _length;
 	private bool _spawnNow = false;
-	private int _coolDown = 5;
+	private int _coolDown = 10;
 	
 	
 	// Use this for initialization
 	void Start () {
-		_length = powersList.Length;
+		
 	}
 	
 	// Update is called once per frame
@@ -24,9 +24,8 @@ public class Manager : MonoBehaviour {
 	}
 	
 	void drop(){
-		int random = (int)Mathf.Round(Random.value * _length);
 		Vector3 randomSpot = new Vector3((Random.value * 4.9f) - 2.45f,(Random.value * 3.3f) - 1.65f,-3f);
-		Instantiate(powersList[random], randomSpot, Quaternion.identity);
+		Instantiate(item, randomSpot, Quaternion.identity);
 	}
 	
 	private IEnumerator spawntimer()
