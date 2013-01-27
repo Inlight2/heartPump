@@ -14,13 +14,13 @@ public class Watch : Weapon {
 	
 	public override void SetLeft()
 	{
-		_transfrom.position += new Vector3(0.25f,0f,0f);
+		//_transfrom.position += new Vector3(0.25f,0f,0f);
 	}
 	
 	public override void SetRight()
 	{
 		_rotationSpeed *= -1;
-		_transfrom.position += new Vector3(-0.15f,0f,0f);
+		//_transfrom.position += new Vector3(-0.15f,0f,0f);
 	}
 	
 	void OnTriggerEnter(Collider other) {

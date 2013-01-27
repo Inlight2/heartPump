@@ -8,6 +8,7 @@ public class God : MonoBehaviour
 	static public Player player3;
 	static public Player player4;
 	static public Heart heart;
+	static public Manager manager;
 	
 	void Start()
 	{
@@ -16,11 +17,33 @@ public class God : MonoBehaviour
 		player3 = GameObject.Find("Player 3").GetComponent<Player>();
 		player4 = GameObject.Find("Player 4").GetComponent<Player>();
 		heart = GameObject.Find("Heart").GetComponent<Heart>();
+		manager = GetComponent<Manager>();
 	}
 	
 	void Update ()
 	{
 		
+	}
+	
+	static public void giveItem(string playerNumber)
+	{
+		switch(playerNumber)
+		{
+		case "1":
+			player1.item = true;
+			break;
+		case "2":
+			player2.item = true;
+			break;
+		case "3":
+			player3.item = true;
+			break;
+		case "4":
+			player4.item = true;
+			break;
+		default:
+			break;
+		}
 	}
 	
 	static public int Pump()

@@ -3,9 +3,11 @@ using System.Collections;
 
 public class Manager : MonoBehaviour {
 	public GameObject item;
+	public PowerUp[] itemList;
 	private int _length;
 	private bool _spawnNow = false;
 	private int _coolDown = 10;
+	public GameObject theCage;
 	
 	
 	// Use this for initialization
@@ -32,5 +34,11 @@ public class Manager : MonoBehaviour {
 	{
 		yield return new WaitForSeconds(_coolDown);
 		_spawnNow = true;
+	}
+	
+	public PowerUp randomItem()
+	{
+		int random = (int)Mathf.Round ((itemList.Length - 1) * Random.value);
+		return itemList[random];
 	}
 }

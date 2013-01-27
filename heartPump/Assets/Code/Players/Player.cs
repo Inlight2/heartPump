@@ -5,7 +5,10 @@ public class Player : MonoBehaviour {
 	public int health;
 	public int magic;
 	public int score;
-	public PowerUp item;
+	public bool item;
+	
+	public PowerUp nickyKage;
+	
 	private Spawner _spawn;
 	private Controller _control;
 	private bool _dead = false;
@@ -56,7 +59,11 @@ public class Player : MonoBehaviour {
 	
 	public void useItem()
 	{
-		item.use(tag);
+		if(item)
+		{
+			nickyKage.Use();
+			item = false;
+		}
 	}
 	
 	public void Pump()
