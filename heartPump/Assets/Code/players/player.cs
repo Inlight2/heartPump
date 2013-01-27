@@ -24,11 +24,6 @@ public class Player : MonoBehaviour {
 	
 	void Update ()
 	{
-		if (Input.GetButtonDown("Player 1" + ": A Button"))
-            {
-                health  = 0;
-            }
-		
 		if(health <= 0 && !_dead)//TODO && not dead
 		{
 			health = 0;
