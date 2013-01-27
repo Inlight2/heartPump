@@ -31,7 +31,7 @@ public class SwordFish : Weapon {
 	}
 	
 	void OnTriggerEnter(Collider other) {
-       	if(!string.Equals(other.name, "Player 1") && string.Equals(other.tag, "Player"))
+       	if(!string.Equals(other.name, God.player1.name) && string.Equals(other.tag, "Player"))
 		{
 			God.DamagePlayer(other.name.Substring(other.name.Length - 1), 1);
 		}

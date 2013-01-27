@@ -21,12 +21,11 @@ public class Watch : Weapon {
 	public override void SetLeft()
 	{
 		_rotationSpeed *= -1;
-		//_transfrom.Translate(new Vector3(0.15f,0f,0f));
 	}
 	
 	public override void SetRight()
 	{
-		//_transfrom.Translate(new Vector3(-0.3f,0f,0f));
+		
 	}
 	
 	void OnTriggerEnter(Collider other) {

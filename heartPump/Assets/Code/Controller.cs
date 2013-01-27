@@ -37,7 +37,7 @@ public class Controller : MonoBehaviour {
     public UILabel myScore;
 
     private GameObject _theCollided;
-    private Player _myPlayer;
+    public Player _myPlayer;
     private Transform _myTransform;
     private tk2dSprite _myPumpSprite;
 
@@ -63,7 +63,7 @@ public class Controller : MonoBehaviour {
 
         myHpBar.SetActive(true);
         myMpBar.SetActive(true);
-        myPwrUp.SetActive(true);
+        myPwrUp.SetActive(false);
 	}
 	
 	void Update ()
@@ -121,6 +121,12 @@ public class Controller : MonoBehaviour {
             {
                 _myPlayer.useItem();
             }
+		if(_myPlayer.item){
+			myPwrUp.SetActive(true);
+		}
+		else{
+			myPwrUp.SetActive(false);
+		}
 		
 	}
 	
@@ -249,13 +255,11 @@ public class Controller : MonoBehaviour {
         {
             myHpBar.SetActive(true);
             myMpBar.SetActive(true);
-            myPwrUp.SetActive(true);
         }
         if (myState == State.Dead)
         {
             myHpBar.SetActive(false);
             myMpBar.SetActive(false);
-            myPwrUp.SetActive(false);
         }
     }
 
