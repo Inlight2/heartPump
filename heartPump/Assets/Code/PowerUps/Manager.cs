@@ -4,7 +4,7 @@ using System.Collections;
 public class Manager : MonoBehaviour {
 	public GameObject item;
 	private int _length;
-	private bool _spawnNow = false;
+	private bool _spawnNow = true;
 	private int _coolDown = 10;
 	public GameObject theCage;
 	
