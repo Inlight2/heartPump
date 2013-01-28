@@ -1,0 +1,54 @@
+HeartPump : CS170 Edition
+
+Link: http://people.ucsc.edu/~zmariano/ggj/heartPump/
+(You can play in the Browser!!)
+
+Summary:
+    This game is a race to the most points before the Heart explodes!
+    In-order to gain points, pump up the Heart!
+    However, be careful because other players can attack you or push you backwards!
+    Once the heart explodes - the person with the most points wins!!!
+    
+Controls:
+    XBOX 360 CONTROLLER:
+        Left-Stick - Movement
+        A - Pump up Heart (when near the Heart)
+        A - Attack your opponents!
+        B - Launch a Magic Push!
+        X - Use your Powerups! (Nicholas Cage)
+    KEYBOARD:
+        Player 1:
+            W/S/A/D - Movement
+            Z - Attack your opponents!
+            X - Launch a Magic Push!
+            C - Use your Powerups! (Nicholas Cage)
+        Player 2:
+            T/G/F/H - Movement
+            V - Attack your opponents!
+            B - Launch a Magic Push!
+            N - Use your Powerups! (Nicholas Cage)
+        Player 3:
+            I/K/J/L - Movement
+            M - Attack your opponents!
+            , - Launch a Magic Push!
+            . - Use your Powerups! (Nicholas Cage)
+        Player 4:
+            UP/DOWN/LEFT/RIGHT - Movement
+            [ - Attack your opponents!
+            ] - Launch a Magic Push!
+            \ - Use your Powerups! (Nicholas Cage)
+            
+Use up to four Xbox controllers to play with four people!!
+Or use a Keyboard(s)!!
+
+Credits:
+    Zane Mariano - zmariano@ucsc.edu
+    Kenneth Cox - kbcox@ucsc.edu
+
+Art Assets by Jenny Tran, Tara Seagal & Arielle Kim / Julian Noble
+
+Characters are from CS170 (UCSC) games: 
+    Asterogue            (AR-521 [Bottom-Right])
+    Pixture                 (Qurio [Top-Left])
+    SiegeBreakers       (Dwarf [Bottom-Left])
+    TimeWhale             (CS170 Joke [Top-Right])
